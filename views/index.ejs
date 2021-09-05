@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Guia de perguntas</title>
 </head>
+
 <body>
-  <h1>Guia de perguntas</h1>
-  <hr>
-  <h3>Teste</h3>
-  <h1><%= nome %></h1> 
-  <h1><%= lang %></h1> 
+
+  <% if(msg){ %>
+    <h3> Mensagem de erro!</h3>
+  <% } else{ %>
+    <h3> sem erro!</h3>
+  <% } %>
 </body>
+
 </html>
