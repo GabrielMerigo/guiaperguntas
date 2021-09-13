@@ -1,5 +1,17 @@
 const express = require('express');
 const app = express();
+const connection = require('./database/database');
+const modelQuestion = require('./database/Question')
+
+connection
+  .authenticate()
+  .then(() => {
+    console.log('conexão feita com o banco de dados!');
+  })
+  .catch(() => {
+    console.log('Ocorreu um erro!');
+  })
+
 
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
