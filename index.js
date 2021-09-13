@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const connection = require('./database/database');
-const modelQuestion = require('./database/Question')
+const Question = require('./database/Question');
 
 connection
   .authenticate()
@@ -12,15 +12,17 @@ connection
     console.log('Ocorreu um erro!');
   })
 
-
 app.set('view engine', 'ejs');
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-
 app.get('/', (req, res) => {
-  res.render("index");
+  Question.findAll({ raw: true }).then(perguntas => {
+    res.render('index', {
+      perguntas
+    });
+  });
 })
 
 app.get('/perguntar', (req, res) => {
@@ -28,11 +30,15 @@ app.get('/perguntar', (req, res) => {
 })
 
 app.post('/savequestion', (req, res) => {
-  console.log(req.body)
   const title = req.body.title;
-  const descricao = req.body.description; 
+  const description = req.body.description;
 
-  res.send(`Formulário recebido! Título: ${title} - Descrição: ${descricao}`);
+  Question.create({
+    title,
+    description
+  }).then(() => {
+    res.redirect("/")
+  });
 })
 
 app.listen(8080, () => {
