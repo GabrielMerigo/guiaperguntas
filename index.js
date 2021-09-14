@@ -45,6 +45,15 @@ app.post('/savequestion', (req, res) => {
 
 app.get('/pergunta/:id', (req, res) => {
   const id = req.params.id;
+  Question.findOne({
+    where: { id: id }
+  }).then(pergunta => {
+    if(!pergunta) {
+      res.redirect('/');
+    }else {
+      res.render('question');
+    }
+  })
 })
 
 app.listen(8080, () => {
