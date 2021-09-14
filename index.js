@@ -18,7 +18,9 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  Question.findAll({ raw: true }).then(perguntas => {
+  Question.findAll({ raw: true, order: [
+    ['id', 'DESC']
+  ]}).then(perguntas => {
     res.render('index', {
       perguntas
     });
@@ -39,6 +41,10 @@ app.post('/savequestion', (req, res) => {
   }).then(() => {
     res.redirect("/")
   });
+})
+
+app.get('/pergunta/:id', (req, res) => {
+  const id = req.params.id;
 })
 
 app.listen(8080, () => {
