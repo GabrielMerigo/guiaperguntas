@@ -64,10 +64,11 @@ app.get('/pergunta/:id', (req, res) => {
 app.post("/answer", (req, res) => {
   const answer = req.body.answerBody;
   const questionID = req.body.question;
+  console.log(questionID)
 
   Answer.create({
     answer, 
-    question
+    questionID
   }).then(() => {
     res.redict(`/pergunta/${questionID}`);
   })
