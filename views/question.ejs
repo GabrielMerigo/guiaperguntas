@@ -5,7 +5,13 @@
     <div class="container">
       <h1><%= pergunta.title %></h1>
       <p><%= pergunta.description %></p>
+      <form>
+        <h3>Responda</h3>
+        <label for="">Resposta:</label>
+        <textarea placeholder="Digite sua resposta" class="form-control" name="answerBody"></textarea><br>
+        <input type="hidden" name="question" value="<%= pergunta.id %>">
+        <button type="submit" class="btn btn-primary">Responda</butto>
+      </form>
     </div>
-
 </body>
 <%- include('partials/footer.ejs') %>

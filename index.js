@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const connection = require('./database/database');
 const Question = require('./database/Question');
+const Answer = require('./database/Answers');
 
 connection
   .authenticate()
