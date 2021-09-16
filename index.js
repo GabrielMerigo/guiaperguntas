@@ -59,7 +59,19 @@ app.get('/pergunta/:id', (req, res) => {
       });
     }
   })
-})
+});
+
+app.post("/answer", (req, res) => {
+  const answer = req.body.answerBody;
+  const questionID = req.body.question;
+
+  Answer.create({
+    answer, 
+    question
+  }).then(() => {
+    res.redict(`/pergunta/${questionID}`);
+  })
+});
 
 app.listen(8080, () => {
   console.log('Aplicação rodando!')

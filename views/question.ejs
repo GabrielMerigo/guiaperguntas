@@ -5,7 +5,7 @@
     <div class="container">
       <h1><%= pergunta.title %></h1>
       <p><%= pergunta.description %></p>
-      <form>
+      <form method="post" action="/answer">
         <h3>Responda</h3>
         <label for="">Resposta:</label>
         <textarea placeholder="Digite sua resposta" class="form-control" name="answerBody"></textarea><br>
