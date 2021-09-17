@@ -5,8 +5,8 @@ const Answer = connection.define('answers', {
   answer: {
     type: Sequelize.TEXT,
     allowNull: false
-  }, 
-  questionId: {
+  }, questionId
+  : {
     type: Sequelize.INTEGER,
     allowNull: false
   }

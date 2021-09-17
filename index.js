@@ -19,9 +19,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.get('/', (req, res) => {
-  Question.findAll({ raw: true, order: [
-    ['id', 'DESC']
-  ]}).then(perguntas => {
+  Question.findAll({
+    raw: true, order: [
+      ['id', 'DESC']
+    ]
+  }).then(perguntas => {
     res.render('index', {
       perguntas
     });
@@ -50,27 +52,35 @@ app.get('/pergunta/:id', (req, res) => {
   Question.findOne({
     where: { id: id }
   }).then(pergunta => {
-    if(!pergunta) {
+    if (!pergunta) {
       res.redirect('/');
-    }else {
-      console.log(pergunta)
-      res.render('question', {
-        pergunta
-      });
+    } else {
+      Answer.findAll({
+        where: { questionId: id },
+        order: [
+          ['id', 'DESC']
+        ]
+      }).then(answers => {
+        console.log(answers)
+        res.render('question', {
+          pergunta,
+          answers
+        });
+      })
+
     }
   })
 });
 
 app.post("/answer", (req, res) => {
   const answer = req.body.answerBody;
-  const questionID = req.body.question;
-  console.log(questionID)
+  const questionId = req.body.question;
 
   Answer.create({
-    answer, 
-    questionID
+    answer,
+    questionId
   }).then(() => {
-    res.redict(`/pergunta/${questionID}`);
+    res.redirect(`/pergunta/${questionId}`);
   })
 });
 
